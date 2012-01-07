@@ -1,0 +1,172 @@
+%\documentclass[11pt,reqno]{amsart}
+\documentclass[11pt,reqno]{article}
+\usepackage[margin=.8in, paperwidth=8.5in, paperheight=11in]{geometry}
+%\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+%\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent7
+\usepackage{graphicx}
+\usepackage{pstricks}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\usepackage{amsmath}
+\usepackage{subfigure}
+\usepackage{caption}
+\pagestyle{plain}
+%\renewcommand{\topfraction}{0.3}
+%\renewcommand{\bottomfraction}{0.8}
+%\renewcommand{\textfraction}{0.07}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\title{Probability and Random Variables: \\ Assignment 1}
+\author{Andrew Rickert}
+\date{Started: December 30, 2011 \\ \hspace{1pt} Ended: January 7,  2011}                                           % Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+\noindent \framebox[1.1\width]{\textbf{Part A}} \par
+
+% Page 1
+\begin{flushleft} 
+\textbf{Class 18.440} - Chapter 1 Problem 9\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+A child has 12 blocks, of which 6 are black, 4 are red, 1 is white, and 1 is blue. If the child puts the blocks in a line, how many arrangements are possible?\\
+
+We can imagine the possible positions for the numbered as $\{ 1,2,3,\cdots, 12\}$. We can represent placing the 6 black blocks as the number of ways we choose 6 positions where the order is irrelevant. This can be done in $\binom{12}{6}$ ways. The 4 red blocks can then be chosen by picking from the remaining 6 positions. This can be done then in $\binom{6}{4}$ ways. Similarly for the white block $\binom{2}{1}$ and the blue block $\binom{1}{1}$. By the basic principle of counting we have 
+\[ \text{Number of arrangements} = \binom{12}{6} \binom{6}{4} \binom{2}{1} \binom{1}{1}  =  \frac{12!}{6!4!1!1!} = 27720\]
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.440} - Chapter 1 Problem 24\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+Expand $(3x^2 + y)^5$\\
+
+\noindent From the binomial theorem we have 
+\[ (x' + y')^5 = \binom{5}{0}y'^5 + \binom{5}{1}x' y'^4 + \binom{5}{2}x'^2 y'^3 + \binom{5}{3}x'^3 y'^2 + \binom{5}{4}x'^4 y'  + \binom{5}{5}x'^5\]
+Calculating the values for the binomial coefficients gives
+\[ (x' + y')^5 =y'^5 +5 x' y'^4 + 10 x'^2 y'^3 +10 x'^3 y'^2 + 5 x'^4 y'  + x'^5\]
+We now let $x' = 3x^2$ and $y' = y$ which gives the answer
+\[ (3x^2 + y)^5 =y^5 +15x^2 y^4 + 90 x^4 y^3 +270 x^6 y^2 + 405 x^8 y  + 243 x^{10} \]
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.440} - Chapter 1 Problem 31\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+ If 8 identical blackboards are to be divided among 4 schools, how many divisions are possible? How many if each school must receive at least 1 blackboard?\\
+ 
+\noindent We may interpret the problem first as asking how many nonnegative integer solutions are there to the equation
+\begin{equation}
+x_1 + x_2 + x_3 + x_4 = 8 \label{eqn:blackboard}
+\end{equation}
+where $x_i$ represents the number of blackboard that school $i$ receives. From the book the answer to this question is 
+\[ \binom{n + r - 1}{r-1} \]
+ Here we have $n = 8$ and $r = 4$ which gives
+ \[ \binom{11}{3} = \frac{11!}{8!3!} = 165 \]
+The second question is "How many positive solutions are there to equation $(\ref{eqn:blackboard}$)?"
+The book says that this is $\binom{n-1}{r-1}$ where $n = 8$ and $r = 4$ which gives
+\[ \binom{7}{3} = \frac{7!}{4!3!} = 35 \]
+ 
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.440} - Chapter 1 Theoretical Exercise 8\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+\noindent Prove that
+\[ \binom{n+m}{r} = \binom{n}{0} \binom{m}{r} + \binom{n}{1} \binom{m}{r-1} + \cdots + \binom{n}{r} \binom{m}{0} \] \\
+
+\noindent Hint: Consider a group of n men and m women. How many groups of size r are possible?\\
+
+We would like to choose $r$ members from two groups, the first containing $n$ men and the second containing $m$ women. There are $r+1$ ways of breaking the selection up amongst the two groups. In the first case we can choose 0 men from the first group which is calculated as $\binom{n}{0}$ then $r$ women from the second group which is calculated as $\binom{m}{r}$. Because these are separate experiments the basic theorem of counting says that choosing 0 men and $r$ women will be done in $\binom{n}{0} \binom{m}{r}$. Next we choose 1 from the men group which can be done in $\binom{n}{1}$ ways and the remainder $r+1$ from the women group in $\binom{w}{r-1}$. Again using the basic theorem of counting selection of $1$ man an $r-1$ can be done in $\binom{n}{1} \binom{m}{r-1}$.\\
+\indent This process continues for each division of $r$ into a selection of $i$ men and $r-i$ women. Because each division contributes to the total number of ways $r$ chooses can be man among the two groups we must sum them to get the total number of possible choices. Since the choices are always from a total of $n + m$ objects we get the identity.
+\begin{equation} \binom{n+m}{r} = \binom{n}{0} \binom{m}{r} + \binom{n}{1} \binom{m}{r-1} + \cdots + \binom{n}{r} \binom{m}{0} \label{eqn:binomsumexpansion}
+\end{equation}\\
+
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.440} - Chapter 1 Theoretical Exercise 9\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+\noindent Use Theoretical Exercise 8 to prove that
+\[ \binom{2n}{n} = \sum_{k=0}^n \binom{n}{k}^2 \] \\
+
+\noindent To prove the identity first we note that $\binom{n}{r} = \binom{n}{n-r}$ which is true since
+\begin{equation} 
+\binom{n}{r} = \frac{n!}{(n-r)!r!} = \frac{n!}{r!(n-r)!} = \frac{n!}{(n - (n-r))!(n-r)!} = \binom{n}{n-r} \label{eqn:binomsym}
+\end{equation}
+If we now let $m=n$ and $r=n$ in equation ($\ref{eqn:binomsumexpansion}$) from the previous problem we get the following expression
+\begin{eqnarray*} 
+\binom{2n}{n} = \binom{n+n}{n} &=& \binom{n}{0} \binom{n}{n} + \binom{n}{1} \binom{n}{n-1} + \cdots + \binom{n}{n} \binom{n}{0} \\
+&=& \binom{n}{0} \binom{n}{0} + \binom{n}{1} \binom{n}{1} + \cdots + \binom{n}{n} \binom{n}{n} \quad \text{by identity ($\ref{eqn:binomsym}$)} \\
+&=& \sum_{k = 0}^n \binom{n}{k}^2
+\end{eqnarray*}
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.440} - Chapter 1 Theoretical Exercise 13\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+\noindent Show that, for $n > 0,$
+
+\[ \sum_{i=0}^n (-1)^i \binom{n}{i} = 0  \]
+
+\noindent Hint: Use the binomial theorem.\\
+
+\noindent The binomial theorem states
+\[ (x + y)^n = \sum_{k=0}^n \binom{n}{k} x^k y^{n-k} \]
+If we take $x = -1$ and $y = 1$ then we derive
+
+\[ 0 = (-1 + 1)^n = \sum_{k=0}^n \binom{n}{k} (-1)^k 1^{n-k} = \sum_{k=0}^n \binom{n}{k} (-1)^k\]
+This is the desired result.
+
+\newpage
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.440} - Chapter 1 Theoretical Exercise 23\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+\noindent Determine the number of vectors $(x_1,\cdots,x_n)$ such that each $x_i$ is a nonnegative integer and
+\[ \sum_{k=1}^n x_i \le k \]\\
+
+\noindent This is a variation of the problem of finding the number of vectors that satisfy the sum for equality. Because we have the inequality we need to find the number of vectors satisfying the sum for each value of $k$ up to and including $k$. By a theorem in the Ross book the number of nonnegative vector solutions for the equation $\sum_{k=1}^n x_k = j$ is $S_j =\binom{j+n-1}{n-1}$. Here $S_j$ is the number of solutions for integer $j$.\\
+\indent Since there is no overlap of the solution vectors for different values of $k$ we can sum the number of outcomes for each value of $k$ to get the total value. The total number of solutions $S_T$ is therefore
+\[ S_T  = \sum_{j = 0}^k S_j = \sum_{j = 0}^k \binom{j+n-1}{n-1} \]
+
+\vspace{15pt}
+\begin{flushleft} 
+\textbf{Class 18.440} - Chapter 1 Self Test Problem/Exercise 14\\
+\rule{500pt}{1pt}\\
+\end{flushleft} 
+
+\noindent Determine the number of vectors $(x_1,\cdots, x_n)$ such that each $x_i$ is a positive integer and
+\[ \sum_{k=1}^n x_i \le k \]
+where $k \ge n$.\\
+
+The reasoning for solving this problem is very similar to that of the previous problem. Because we are looking for positive solutions, however, we use the expression $\binom{k-1}{n-1}$. This gives the number of positive solution vectors for a value $j$ such that $ \sum_{k=1}^n x_i = j$. By the reasoning from the previous problem the total number of solution vectors is 
+\[ S_T  =  \sum_{j = n}^k \binom{k-1}{n-1}\]
+Note the sum starts from $j = n$ since there can be no positive solutions when $j < n$.\\
+
+\newpage
+\noindent \framebox[1.1\width]{\textbf{Part B}} \par
+
+\noindent Consider permutations $ \sigma : \{1, 2,É,n\} \to \{1, 2,É,n\}.$\\
+\noindent 1. How many such $\sigma$ have only one cycle, i.e., have the property that $\sigma(1),\sigma \circ \sigma(1),\sigma \circ \sigma \circ \sigma(1)$,É cycles through all elements of $\{1, 2,É,n\}$?\\
+
+In order to produce a cycle we need to make each integer map to another integer besides itself and also not to one that has already been mapped from. This can be accomplished by removing 1 from the set and mapping to another value $i$. Next we remove $i$ and map to another value $j$. We continue until we have exhausted the set.\\
+\indent Because we can not map from 1 to 1 we remove it and start with $n-1$ elements to choose from. After making our choice there are $n-2$ elements to chose from and so on. This leaves us with $(n-1)(n-2)\cdots(2)(1) = (n-1)!$ one cycle maps.\\
+\indent Starting from 1 is arbitrary. If we start from another value $k$ then eventually we will need to map to 1. At this point there will be a map from 1 from and to all the values that map from $k$ since the set we constructed was made to include any map starting from 1. We can similarly get to $k$ from 1 since we include all such maps and then map to the remainder of those values mapped from $k$. This set would again have to be among those starting from one from the definition of the set. This shows that one-cycle maps starting from 1 include all other maps starting from any other value.\\
+
+
+\noindent 2. How many $\sigma$ are fixed-point-free involutions, i.e., have the property that for each $j$, $\sigma(j) \neq j$ but $\sigma \circ \sigma(j)= j$?
+
+We first note that $n$ in $ \sigma : \{1, 2,É,n\} \to \{1, 2,É,n\}.$ must be even. This must be true since $\sigma(j) \neq j$ but $\sigma \circ \sigma(j)= j$ defines a 2-cycle. Every element must be in one of these two cycles and none of the two cycles may overlap. This partitions the set into a collection of elements grouped on whether they occur in each others two cycle. The number of elements in the set must be a $\sum_{k = 0}^j 2 = 2j$ which shows that the number of elements must be even.
+\indent When defining the possible maps we may first choose from $n-1$ other elements. This is because mapping from $i$ to $i$ creates a fixed point which is forbidden by hypothesis. The element chosen for the first mapped value must map back to the original value so that we have the 2 cycle required by hypothesis. This leaves $n-3$ elements to chose from for the next mapped value. We again eliminate another value to satisfy the hypotheses leaving $n-5$ elements. Continuing this process we see that there must be $(n-1)(n-3)\cdots(3)(1)$ fixed point free involutions.
+
+\end{document}  
